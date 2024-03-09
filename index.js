@@ -6,13 +6,9 @@ const port = 3000
 app.set("views", "./views");
 app.set("view engine", "pug");
 
-app.get('/', (req, res) => {
-    res.render("client/pages/home/index");
-});
-
-app.get("/products", (req, res) => {
-    res.send("Trang dan danh sách sản phẩm");
-});
+//Nhúng route
+const route = require("./routes/client/index.route");
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
