@@ -1,6 +1,9 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+
+//Cấu hình file dotenv
+require("dotenv").config();
+const port = process.env.PORT;
 
 //Cấu hình pug
 app.set("views", "./views");
