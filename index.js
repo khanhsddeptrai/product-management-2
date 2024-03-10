@@ -13,8 +13,8 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 //Cấu hình mongoose
-const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL);
+const database = require("./config/database");
+database.connect();
 
 //Nhúng route
 const route = require("./routes/client/index.route");
