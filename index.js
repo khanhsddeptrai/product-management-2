@@ -12,6 +12,10 @@ app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "pug");
 
+//Cấu hình mongoose
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL);
+
 //Nhúng route
 const route = require("./routes/client/index.route");
 route(app);
