@@ -5,6 +5,9 @@ const app = express();
 require("dotenv").config();
 const port = process.env.PORT;
 
+//Cấu hình file tĩnh
+app.use(express.static("public"));
+
 //Cấu hình pug
 app.set("views", "./views");
 app.set("view engine", "pug");
