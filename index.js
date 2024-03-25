@@ -26,6 +26,10 @@ route(app);
 const adminRouter = require("./routes/admin/index.route");
 adminRouter(app);
 
+//App locals variables - use in all pug file
+const systemConfig = require("./config/system");
+app.locals.prefixAdmin = systemConfig.prefixAdmin
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
