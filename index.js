@@ -18,8 +18,13 @@ const database = require("./config/database");
 database.connect();
 
 //Nhúng route
+//client
 const route = require("./routes/client/index.route");
 route(app);
+
+//admin
+const adminRouter = require("./routes/admin/index.route");
+adminRouter(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
