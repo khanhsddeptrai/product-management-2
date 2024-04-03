@@ -26,7 +26,8 @@ module.exports.index = async (req, res) => {
         filterStatus[index].class = "active";
     }else{
         const index = filterStatus.findIndex(item => item.status == "");
-        filterStatus[index].class = "active";    }
+        filterStatus[index].class = "active";    
+    }
 
     let find = {
         deleted : false
@@ -36,11 +37,20 @@ module.exports.index = async (req, res) => {
         find.status = req.query.status;
     }
 
+    let keyword = "";
+    if(req.query.keyword){
+        keyword = req.query.keyword
+
+        const regex = new RegExp(keyword, "i");
+        find.title = regex;
+    }   
+
     const products = await Product.find(find);
 
     res.render("admin/pages/products/index", {
         pageTitle : "Trang sản phẩm",
         products : products,
-        filterStatus : filterStatus
+        filterStatus : filterStatus,
+        keyword : keyword //hien thi ra views keyword tren o tim kiem
     });
 }
