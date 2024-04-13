@@ -1,0 +1,35 @@
+extends ../layouts/default.pug
+
+block main  
+
+    header.bg.text-white.border-bottom
+        .d-flex.justify-content-center
+            .logo.p-3.d-flex.justify-content-center
+                a(href='/')
+                    img(src='/images/logo.svg' style='height: 8rem' alt='Dergi Watch Logo')
+        .container
+            .d-flex.flex-nowrap.align-items-end.justify-content-center.justify-content-md-end
+            ul.nav.col-12.col-md-auto.me-md-auto.justify-content-center.px-2.ul-text-black
+                li#brandpage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary TH&#x1AF;&#x1A0;NG HI&#x1EC6;U
+                li#malepage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary NAM
+                li#femalepagae.loadPage
+                    a.nav-link.text-center.px-2.text-secondary N&#x1EEE;
+                li#couplepage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary C&#x1EB6;P &Dstrok;&Ocirc;I
+                li#jewelrypage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary TRANG S&#x1EE8;C
+                li#accessorypage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary PH&#x1EE4; KI&#x1EC6;N
+                li#contactpage.loadPage
+                    a.nav-link.text-center.px-2.text-secondary LI&Ecirc;N H&#x1EC6;
+    
+                .pb-3.text-center
+                    button.btn.btn-outline-secondary.fw-bold.me-2(type='button') jbjhbjhbjhbjbjhb
+                    a(href='/logout')
+                        button#logOutBtn.btn.btn-outline-danger(type='button')
+                            i.fa-solid.fa-arrow-right-from-bracket.me-3
+                            | Log out
+                    form.col
+                        input.form-control.form-control-dark(type='search' placeholder='Tìm kiếm thương hiệu hoặc sản phẩm' aria-label='Search')

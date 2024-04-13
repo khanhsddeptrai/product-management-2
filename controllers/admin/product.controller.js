@@ -1,33 +1,9 @@
 const Product = require("../../models/product.model");
+const filterStatusHelper = require("../../helpers/filterStatus");
 
 module.exports.index = async (req, res) => {
-    let filterStatus = [
-        {
-            name : "Tất cả",
-            status : "",
-            class : ""
-        },
-
-        {
-            name : "Hoạt động",
-            status : "active",
-            class : ""
-        },
-
-        {
-            name : "Dừng hoạt động",
-            status : "inactive",
-            class : ""
-        }
-    ]
-
-    if(req.query.status){
-        const index = filterStatus.findIndex(item => item.status == req.query.status);
-        filterStatus[index].class = "active";
-    }else{
-        const index = filterStatus.findIndex(item => item.status == "");
-        filterStatus[index].class = "active";    
-    }
+   //bộ lọc
+    let filterStatus = filterStatusHelper(req.query);
 
     let find = {
         deleted : false
@@ -45,12 +21,32 @@ module.exports.index = async (req, res) => {
         find.title = regex;
     }   
 
-    const products = await Product.find(find);
+    //pagenation
+    let objectPagination = {
+        currentPage : 1,
+        limitItems : 4
+    }
+
+    if(req.query.page){
+        objectPagination.currentPage = parseInt(req.query.page);
+    }
+
+    objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItems
+
+    const countProduct = await Product.countDocuments(find);
+    
+    const totalPage = Math.ceil(countProduct/objectPagination.limitItems);
+    objectPagination.totalPage = totalPage;
+  
+    //end pagination
+
+    const products = await Product.find(find).limit(objectPagination.limitItems).skip( objectPagination.limitItems);
 
     res.render("admin/pages/products/index", {
         pageTitle : "Trang sản phẩm",
         products : products,
         filterStatus : filterStatus,
-        keyword : keyword //hien thi ra views keyword tren o tim kiem
+        keyword : keyword,//hien thi ra views keyword tren o tim kiem
+        pagination : objectPagination
     });
 }

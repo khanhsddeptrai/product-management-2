@@ -16,3 +16,16 @@ if(buttonStatus.length > 0){
     });
 }
 
+//pagination
+const buttonPaginations = document.querySelectorAll("[button-pagination]");
+if(buttonPaginations){
+    let url = new URL(window.location.href);
+
+    buttonPaginations.forEach(button =>{
+        button.addEventListener("click",()=>{
+            const page = button.getAttribute("button-pagination");
+            url.searchParams.set("page", page);
+            window.location.href = url.href;
+        })
+    });
+}
